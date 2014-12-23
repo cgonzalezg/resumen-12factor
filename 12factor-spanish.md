@@ -72,3 +72,42 @@ Scalar via el modelo de proceso (6).
 - "Los procesos de la aplicación de doce factores toman fuertes señales del modelo de proceso de unix para ejecutar daemons de servicios"
 - esto no significat que las app no puedan utilizar su propio pool de procesos, pero la aplicacion debe ser capaz de crear multiples procesos en diferentes maquinas fisicas.
 - formacion de procesos: array de tipo de procesos  y numero de procesos por cada tipo.
+- una app jamas debe ser demonizada(auto restart), debe utilizar el manejador de procesos del Sistema Operativo, para responder a crases del sistema, para logging y para manajar inicializaciones del usuario como restarts y para el sistema.
+
+## 9. Disponibilidad.
+Maximizar la robustez con rapida inicializacion y apagado "graceful"(agradecido??)
+- app tiene que poder apagarge e iniciarse en cualquier momento. Esto facilita una escalabilidad rapida y elastica, rapido deployment de cambios en el codigo o configuracion, y robustez de deploys en produccion.
+- Pequeños tiempos de inicializacion dan una mayor agilidad para los procesos de releases(lanzamientos) y para escalar; y esto ayuda a la robustez, por que el manejador de procesos puede mover con mayor facilidad los procesos (app) a una nueva maquina fisica cuando es requerido.
+- los procesos son apagado de correcta cuando reciven un SIGTERM del manejador de procesos.
+- Procesos deben ser tambien robustos ante una muerte subita, en casa de fallo por Hardware. Recomendacion Beanstalkd(Que es esto????).
+
+## 10. Paridad Desarrollo / Produccion.
+Mantener desarrollo, staging y produccion tan similares como sea posible.
+- Problemas historicos:
+- - Problema de tiempo: Un desarrollador puede trabajar en el codigo durante dias, semanas o incluso meses antes de poner en produccion.
+- - Problema personal: Desarrolladores escribe codigo, Ingenieros operaciones lo ponen en produccion.
+- - Problema de las herramientas: Desarrolladores usan diferantes herramientas que en produccion.
+- Esta arquitectura esta diseñada para el deploymente continuo al manatener los problemas entre desarrollo y produccion tan tequeños como sea posible.
+- - Hacer el problema de tiempo pequeño: un desarrolador debe escribir codigo y ser capaz de poner lo en produccion en horas o incluso minutos.
+- - Hacer el problema personal pequeño: desarroladores que escriben el codigo deben estas implicados en el proceso de poner el SW en produccion y observar su comportamiento en produccion.
+- - Hacer el problem de las herramientas pequeño: mantener desarrollo y produccion tan similar como sea posible.
+- No utilizar las mismas herramientas en desarrollo y produccion puede llevar a grandes problemas en produccion y es un gran problema para el deployment continuo.
+
+## 11 Logs
+- Logs dan una vision del comportamiento de la aplicacion.
+- Son un flujo de agregaciones, eventos ordenados en tiempo recojidos de los flujos de salida de todos los procesos ejecutados y sus backing services(servicios horneados).
+- las applicaciones no debe manejar archivos de logs. En vez de esos los processos escriben a la salida estandar (stdout).
+- en desarrollo local, el programador vera el comportamiento de la app, como un flujo continuo de eventos en su terminal.
+- en staging o produccion, cada flujo de proceso sera capturado por sus ambiente de ejecucion. recojido junto con otros flujo de la app, y dijido a uno mas destinos para su analisis y archivo.
+- Estos archivos, no son visibles ni configurables por la aplicacion por el contrario seran manejos por el ambiente de ejecucion.
+
+- Estos flujos pueden ser enviados a sistemas de analisis de datos. Estos sistemas permiten:
+- - Encontrar eventos especificos en el pasado.
+- - Crear estadisticas y analizar comportemientos de la aplicacion, como request por minuto.
+-  Activar alertas de acuerdo de heuristicas definidas por el usuario.
+
+## 12 Administrar procesos.
+
+- La administracion de procesos debe ser en un ambiente identico al que utilizan las apps.
+- Estos se ejecutaran contra un lanzamiento(release), usando el mismo docigo y configuraciones como cualquier otro proceso ejecutado contra esta release.
+- Codigo de administracion debe ser embarcado como codigo de aplicacion, para evitar problemas de sincronizacion.
