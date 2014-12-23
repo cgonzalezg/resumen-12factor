@@ -17,8 +17,8 @@
 - correlacion 1 a 1
 - - si hay multiples codigos base no es una app, es un sistema distribuidos
 - - aplicaciones que comparter codigo es una violacion de 12-factor, solo se comparte codigo mediante librerias, incluidad mediante un manejador de depencias.
-- deploy -> instancia de una app en ejecucion
-- deployment -> crear un deploy
+- deploy (desplegar)-> instancia de una app en ejecucion
+- deployment(despliege) -> crear un deploy
 - el codigo base es el mismo en todos los deploy, pero con diferente version del mismo.
 
 ## 2. Dependencias
@@ -42,7 +42,7 @@ Tratar servicios horneados como recursos adjuntos
 - para la app ambos son adjuntados, accesibles y configurados localmente.
 - debe ser posible intercambiar un recurso externo por otro interno y viceversa con solo un cambio en la configuracion de la app, es decir sin hacer ningun cambio en el codigo.
 - cada servicio horneado es un "recurso".
-## 5. Compilar| contruccion(build), liberar(release), ejecutar(run).
+## 5. Compilar| contruccion(build), liberar| lanzamiento(release), ejecutar(run).
 Separacion estricta entre compilacion, liberacion y ejecucion.
 ### Etapa de compilacion | contrucion(build stage).
 - convertir el codigo del repositorio(lugar donde se guarda el codigo) a un ejecutable.
@@ -69,3 +69,6 @@ Ejecutar la aplicacion como uno o mas procesos inmutables(su estado no cambia).
 - notese que tambien el anclaje del puerto significa que una app puede convertirse en un servicio horneado de otra app, dando la URL de la app horneada como recurso en la configuracin de la app consumidora.
 ## 8. Concurrencia.
 Scalar via el modelo de proceso (6).
+- "Los procesos de la aplicación de doce factores toman fuertes señales del modelo de proceso de unix para ejecutar daemons de servicios"
+- esto no significat que las app no puedan utilizar su propio pool de procesos, pero la aplicacion debe ser capaz de crear multiples procesos en diferentes maquinas fisicas.
+- formacion de procesos: array de tipo de procesos  y numero de procesos por cada tipo.
