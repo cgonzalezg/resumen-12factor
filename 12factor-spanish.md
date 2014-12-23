@@ -15,8 +15,8 @@
 ![One codebase maps to many deploys](codebase.png)
 
 - correlacion 1 a 1
-- - si hay multiples codigos base no es una app, es un sistema distribuidos
-- - aplicaciones que comparter codigo es una violacion de 12-factor, solo se comparte codigo mediante librerias, incluidad mediante un manejador de depencias.
+ - si hay multiples codigos base no es una app, es un sistema distribuidos
+ - aplicaciones que comparter codigo es una violacion de 12-factor, solo se comparte codigo mediante librerias, incluidad mediante un manejador de depencias.
 - deploy (desplegar)-> instancia de una app en ejecucion
 - deployment(despliege) -> crear un deploy
 - el codigo base es el mismo en todos los deploy, pero con diferente version del mismo.
@@ -84,13 +84,13 @@ Maximizar la robustez con rapida inicializacion y apagado "graceful"(agradecido?
 ## 10. Paridad Desarrollo / Produccion.
 Mantener desarrollo, staging y produccion tan similares como sea posible.
 - Problemas historicos:
-- - Problema de tiempo: Un desarrollador puede trabajar en el codigo durante dias, semanas o incluso meses antes de poner en produccion.
-- - Problema personal: Desarrolladores escribe codigo, Ingenieros operaciones lo ponen en produccion.
-- - Problema de las herramientas: Desarrolladores usan diferantes herramientas que en produccion.
+ - Problema de tiempo: Un desarrollador puede trabajar en el codigo durante dias, semanas o incluso meses antes de poner en produccion.
+ - Problema personal: Desarrolladores escribe codigo, Ingenieros operaciones lo ponen en produccion.
+ - Problema de las herramientas: Desarrolladores usan diferantes herramientas que en produccion.
 - Esta arquitectura esta diseñada para el deploymente continuo al manatener los problemas entre desarrollo y produccion tan tequeños como sea posible.
-- - Hacer el problema de tiempo pequeño: un desarrolador debe escribir codigo y ser capaz de poner lo en produccion en horas o incluso minutos.
-- - Hacer el problema personal pequeño: desarroladores que escriben el codigo deben estas implicados en el proceso de poner el SW en produccion y observar su comportamiento en produccion.
-- - Hacer el problem de las herramientas pequeño: mantener desarrollo y produccion tan similar como sea posible.
+ - Hacer el problema de tiempo pequeño: un desarrolador debe escribir codigo y ser capaz de poner lo en produccion en horas o incluso minutos.
+ - Hacer el problema personal pequeño: desarroladores que escriben el codigo deben estas implicados en el proceso de poner el SW en produccion y observar su comportamiento en produccion.
+ - Hacer el problem de las herramientas pequeño: mantener desarrollo y produccion tan similar como sea posible.
 - No utilizar las mismas herramientas en desarrollo y produccion puede llevar a grandes problemas en produccion y es un gran problema para el deployment continuo.
 
 ## 11 Logs
@@ -102,9 +102,9 @@ Mantener desarrollo, staging y produccion tan similares como sea posible.
 - Estos archivos, no son visibles ni configurables por la aplicacion por el contrario seran manejos por el ambiente de ejecucion.
 
 - Estos flujos pueden ser enviados a sistemas de analisis de datos. Estos sistemas permiten:
-- - Encontrar eventos especificos en el pasado.
-- - Crear estadisticas y analizar comportemientos de la aplicacion, como request por minuto.
--  Activar alertas de acuerdo de heuristicas definidas por el usuario.
+ - Encontrar eventos especificos en el pasado.
+ - Crear estadisticas y analizar comportemientos de la aplicacion, como request por minuto.
+ -  Activar alertas de acuerdo de heuristicas definidas por el usuario.
 
 ## 12 Administrar procesos.
 
